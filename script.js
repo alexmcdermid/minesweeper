@@ -16,7 +16,7 @@ var boardSize = width*height;
 
 //event listeners
 document.querySelector('.easy').addEventListener('click', function() {
-    bombs = 10;
+    bombs = 8;
     buttonEasy.parentNode.removeChild(buttonEasy);
     buttonHard.parentNode.removeChild(buttonHard);
     difficulty.parentNode.removeChild(difficulty);
@@ -24,7 +24,7 @@ document.querySelector('.easy').addEventListener('click', function() {
 });
 
 document.querySelector('.hard').addEventListener('click', function() {
-    bombs = 20;
+    bombs = 16;
     buttonEasy.parentNode.removeChild(buttonEasy);
     buttonHard.parentNode.removeChild(buttonHard);
     difficulty.parentNode.removeChild(difficulty);
@@ -63,9 +63,31 @@ function createBoard() {
         square.style.width = width;
         square.style.height = height;
         square.setAttribute('id', i);
+        square.classList.add(i);
         square.classList.add(gameArray[i]);
         grid.appendChild(square);
         squares.push(square); 
+
+        square.addEventListener('click', function(input) {
+            click(square)
+        });
     }
-    
+    //logic to deal with nearby bombs in an array while accounting for board dimensions 
+    for (let i = 0; i < squares.length; i++) {
+        let total = 0
+      
+        if (squares[i].classList.contains('empty')) {
+         
+          squares[i].setAttribute('data', total)
+        }
+      }
+
+}
+
+function click(square) {
+    if (square.classList.contains('bomb')) {
+        console.log('game over');
+    } else if (square.classList.contains('empty')){
+
+    }
 }
